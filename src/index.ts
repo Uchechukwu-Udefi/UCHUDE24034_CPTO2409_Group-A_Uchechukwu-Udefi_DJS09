@@ -29,9 +29,24 @@ function showReviewTotal (value : number) {
   return 'review total ' + value.toString()
 }
 
-function mostRecentViewer(value: number, name: string) {
+function mostRecentViewer(value: number, name: string, loyaltyUser: boolean) {
     const reviewTotal = showReviewTotal(value);
-    reviewTotalDisplay.innerHTML = `${reviewTotal} | Recent viewer: ${name}`;
+    const star = loyaltyUser ? '⭐' : '';
+    reviewTotalDisplay.innerHTML = `${reviewTotal} | Recent viewer: ${name}   ${star}`;
 }
 
-mostRecentViewer(reviews.length, reviews[0].name);
+mostRecentViewer(reviews.length, reviews[0].name, reviews[0].loyaltyUser);
+
+const you = {
+    userName: {firstName: 'Bobby', lastName: 'Brown'},
+    isReturning: true,
+}
+
+function populateUser(isReturning: boolean, userName: { firstName: string; lastName: string }) {
+    if (isReturning){
+        returningUserDisplay.innerHTML = 'back ' + userName.firstName;
+    }
+    userNameDisplay.innerHTML = userName.lastName;
+}
+
+populateUser(you.isReturning, you.userName)
