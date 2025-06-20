@@ -1,3 +1,4 @@
+import { LoyaltyUser } from "./enums";
 const reviewTotalDisplay = document.querySelector('#reviews');
 const returningUserDisplay = document.querySelector('#returning-user');
 const userNameDisplay = document.querySelector('#user');
@@ -6,9 +7,9 @@ function showReviewTotal (value : number) {
   return 'review total ' + value.toString()
 }
 
-export function mostRecentViewer(value: number, name: string, loyaltyUser: boolean) {
+export function mostRecentViewer(value: number, name: string, loyaltyUser: LoyaltyUser) {
     const reviewTotal = showReviewTotal(value);
-    const star = loyaltyUser ? '⭐' : '';
+    const star = LoyaltyUser.GOLD_USER ? '⭐' : ''
     reviewTotalDisplay.innerHTML = `${reviewTotal} | Recent viewer: ${name}   ${star}`;
 }
 
