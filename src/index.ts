@@ -2,10 +2,11 @@
 // Write a function that will only accept numbers and attend to
 // all TypeScript weakness flags.
 // : number
-const reviewTotalDisplay = document.querySelector("#reviews");
+import { mostRecentViewer, populateUser } from './utils'
 
 let isOpen : boolean
 
+// Reviews
 const reviews: {
   name: string;
   stars: number;
@@ -32,28 +33,76 @@ const reviews: {
   },
 ];
 
-function showReviewTotal (value : number) {
-  return 'review total ' + value.toString()
+// User
+const you: {
+  firstName: string; 
+  lastName: string;
+  isReturning: boolean;
+  age: number;
+  stayedAt: string[];
+} = {
+    firstName: 'Bobby', 
+    lastName: 'Brown',
+    isReturning: true,
+    age: 30,
+    stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow'],
 }
 
-function mostRecentViewer(value: number, name: string, loyaltyUser: boolean) {
-    const reviewTotal = showReviewTotal(value);
-    const star = loyaltyUser ? '⭐' : '';
-    reviewTotalDisplay.innerHTML = `${reviewTotal} | Recent viewer: ${name}   ${star}`;
-}
+const properties : {
+    image: string;
+    title: string;
+    price: number;
+    location: {
+        firstLine: string;
+        city: string;
+        code: number;
+        country: string;
+    };
+    contact: string;
+    isAvailable: boolean;
+}[] = [
+  {
+    image: '',
+        title: 'Colombian Shack',
+        price: 45,
+        location: {
+            firstLine: 'shack 37',
+            city: 'Bogota',
+            code: 45632,
+            country: 'Colombia'
+        },
+        contact: 'marywinkle@gmail.com',
+        isAvailable: true 
+  },
+  {
+    image: '',
+        title: 'Polish Cottage',
+        price: 34,
+        location: {
+            firstLine: 'no 23',
+            city: 'Gdansk',
+            code: 343903,
+            country: 'Poland'
+        },
+        contact: 'garydavis@hotmail.com',
+        isAvailable: false
+  },
+  {
+    image: '',
+        title: 'London Flat',
+        price: 23,
+        location: {
+            firstLine: 'flat 15',
+            city: 'London',
+            code: 35433,
+            country: 'United Kingdom',
+        },
+        contact: 'andyluger@aol.com',
+        isAvailable: true
+  },
+]
 
+//Function
 mostRecentViewer(reviews.length, reviews[0].name, reviews[0].loyaltyUser);
 
-const you = {
-    userName: {firstName: 'Bobby', lastName: 'Brown'},
-    isReturning: true,
-}
-
-function populateUser(isReturning: boolean, userName: { firstName: string; lastName: string }) {
-    if (isReturning){
-        returningUserDisplay.innerHTML = 'back ' + userName.firstName;
-    }
-    userNameDisplay.innerHTML = userName.lastName;
-}
-
-populateUser(you.isReturning, you.userName)
+populateUser(you.isReturning, you.firstName)
