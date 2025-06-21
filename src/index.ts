@@ -2,9 +2,14 @@
 // Write a function that will only accept numbers and attend to
 // all TypeScript weakness flags.
 // : number
-import { mostRecentViewer, populateUser, } from './utils'
+import { mostRecentViewer, populateUser, showDetails, getTopTwoReviews } from './utils'
 import { Permissions, LoyaltyUser } from './enums'; 
 import { Price, Country } from './types'
+const propertyContainer = document.querySelector('.properties')
+const reviewContainer = document.querySelector('.reviews')
+const container = document.querySelector('.container')
+const button = document.querySelector('button')
+const footer = document.querySelector('.footer')
 
 let isLoggedIn : boolean
 
@@ -108,16 +113,8 @@ let authorityStatus : any
 
 isLoggedIn = true
 
-function showDetails(authorityStatus: boolean | Permissions, element : HTMLDivElement, price: number) {
-   if (authorityStatus) {
-       const priceDisplay = document.createElement('div')
-       priceDisplay.innerHTML ='$' + price.toString() + '/night'
-       element.appendChild(priceDisplay)
-   }
-}
 
 // Add properties to Dashboard
-const propertyContainer = document.querySelector('.properties');
 for (let i = 0; i < properties.length; i++) {
         const card = document.createElement('div')
         card.classList.add('card')
@@ -129,6 +126,27 @@ for (let i = 0; i < properties.length; i++) {
         showDetails(you.permissions, card, properties[i].price)
     };
 
-const footer = document.querySelector('.footer')
+let count = 0
+function addReviews(array: {
+    name: string;
+    stars: number;
+    loyaltyUser: LoyaltyUser;
+    date: string;
+}[] ) : void {
+    if (!count ) {
+        count++
+        const topTwo = getTopTwoReviews(array)
+        for (let i = 0; i < topTwo.length; i++) {
+            const card = document.createElement('div')
+            card.classList.add('review-card')
+            card.innerHTML = topTwo[i].stars + ' stars from ' + topTwo[i].name
+            reviewContainer.appendChild(card)
+        }
+        container.removeChild(button) 
+    }
+}
+
+button.addEventListener('click', () => addReviews(reviews))
+
 let currentLocation: [string, string, number] = ['Cape Town', '11:35', 17]
 footer.innerHTML = currentLocation[0] + '|' + currentLocation[1] + '|' + currentLocation[2] + '°'
