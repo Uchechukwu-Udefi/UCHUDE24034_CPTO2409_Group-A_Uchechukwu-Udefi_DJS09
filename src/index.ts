@@ -8,12 +8,12 @@ import { LoyaltyUser } from './enums';
 let isOpen : boolean
 
 // Reviews
-const reviews: {
+/*const reviews: {
   name: string;
   stars: number;
   loyaltyUser: LoyaltyUser;
   date: string;
-} [] = [
+}*/const reviews: any [] = [
   {
     name: "Sheia",
     stars: 5,
