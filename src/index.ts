@@ -4,6 +4,7 @@
 // : number
 import { mostRecentViewer, populateUser, } from './utils'
 import { Permissions, LoyaltyUser } from './enums'; 
+import { Price, Country } from './types'
 
 let isLoggedIn : boolean
 
